@@ -43,7 +43,7 @@ public class Board {
 
     public Cell getCell(int row, int col) {
         if (isOutsideBoard(row, col)) {
-            throw new IllegalArgumentException("Cell is outside the board.");
+            return null;
         }
         return cells.get(row).get(col);
     }

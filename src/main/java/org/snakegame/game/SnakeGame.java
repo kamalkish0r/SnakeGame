@@ -29,11 +29,11 @@ public class SnakeGame {
         switch (direction) {
             case LEFT -> newCol -= 1;
             case RIGHT -> newCol += 1;
-            case UP -> newRow =- 1;
+            case UP -> newRow -= 1;
             case DOWN -> newRow += 1;
         }
 
-        return board.isOutsideBoard(newRow, newCol) ? null : board.getCell(newRow, newCol);
+        return board.getCell(newRow, newCol);
     }
 
     public void startGame() {
@@ -60,7 +60,6 @@ public class SnakeGame {
         while (true) {
             System.out.print("Which direction you want to move (L, R, U, D): ");
             String input = scanner.nextLine().trim().toUpperCase();
-
             switch (input) {
                 case "L":
                     return Direction.LEFT;
