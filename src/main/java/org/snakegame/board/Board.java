@@ -1,6 +1,7 @@
 package org.snakegame.board;
 
-import org.snakegame.snake.Cell;
+import org.snakegame.cell.Cell;
+import org.snakegame.constants.CellState;
 
 import java.util.ArrayList;
 
@@ -53,8 +54,11 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                if (getCell(row, col).isOccupied()) {
+                CellState currCellState = getCell(row, col).getCellState();
+                if (currCellState == CellState.SNAKE) {
                     sb.append("*");
+                } else if(currCellState == CellState.FOOD) {
+                    sb.append("#");
                 } else {
                     sb.append(".");
                 }

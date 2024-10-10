@@ -1,8 +1,9 @@
 package org.snakegame.game;
 
 import org.snakegame.board.Board;
+import org.snakegame.constants.CellState;
 import org.snakegame.constants.Direction;
-import org.snakegame.snake.Cell;
+import org.snakegame.cell.Cell;
 import org.snakegame.snake.Snake;
 
 import java.util.Random;
@@ -42,7 +43,7 @@ public class SnakeGame {
 
             Direction direction = getUserDirection();
             Cell nextCell = getNextCell(snake.getHead(), direction);
-            if (nextCell == null || nextCell.isOccupied()) {
+            if (nextCell == null || nextCell.getCellState().equals(CellState.SNAKE)) {
                 System.out.println("Your score : " + score);
                 System.out.println("...Game Over...");
                 break;
