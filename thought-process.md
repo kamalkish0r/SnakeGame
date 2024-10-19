@@ -86,3 +86,90 @@ public class Snake {
 }
 ```
 
+Now it's time to focus on `Food`. We'll reflect back & update the above classes if necessary.
+
+Let's list down things we need to take care of :
+1. FoodType : Regular, Special
+2. FoodValue : 1 unit for regular & random value for special.
+3. Coordinate : appears on random coordinates
+   * Edge case : shouldn't overlap with snake
+4. Frequency : regular food appears more frequently than the special one.
+5. Both increase the snake's length by 1 unit.
+6. A new one should appear as soon as previous one is consumed.
+   * Edge case : if there's no space left for food to appear the game ends and the player won!
+7. Both food may be present at the same time on board.
+
+The tricky one's here are `Frequency` & `Coordinate`(where food is to be placed).
+
+I am thinking of having an abstract class `Food` which is inherited by `RegularFood` & `SpecialFood`.
+
+Now let's deal with the coordinates part first : 
+* we generate random coordinates and check if it's occupied or not
+* How to deal with coordinates for special food as it spans to more than a cell?
+  * For simplicity let's assume that special food has 4 unit size
+  * Like regular food we first generate coordinate for a cell and then try different combinations with its neighbors to find unoccupied space. 
+* How can it be done differently?
+
+
+Now let's take care of frequency : 
+* One option which comes to mind is to establish direct relation between frequencies of both food types.
+  * something like after every `k` appearances of regular food they both appear together
+* Another way is to make it probabilistic, i.e. there's some `p` % chance that special food will appear
+
+For food generation, we can have separate class responsible for food generation. This class will also take of frequency management 
+for food generation. I'm thinking of keeping this as static and stateless. It'll have a `generateFood` method which returns a list of 
+Food when called. Its responsibility is to generate food when called, which means finding empty coordinates, decide whether it should generate special
+food or not.
+
+Maintaining a separate class for `Food` is creating unnecessary complexity, and I'm thinking of moving the value to `Cell`, it already has got `CellState`
+which can be set as `RegularFood`, `SpecialFood`.
+
+ToDo : make snake head distinguishable so that it's easy for the player
+
+This is how the `FoodGenerator` class looks like
+```java
+public abstract class FoodGenerator {
+    public static Random random = new Random();
+
+    private static boolean shouldGenerateSpecialFood() {
+        Random random = new Random();
+        return random.nextInt(constants.SPECIAL_FOOD_FREQUENCY.getValue()) == 0;
+    }
+
+    private static void generateFood(
+            Board board,
+            CellState cellState,
+            FoodValue foodValue
+    ) throws BoardNotEmpty {
+        Cell cell = null;
+        int retries = 0;
+        do {
+            int row = random.nextInt(board.getRows());
+            int col = random.nextInt(board.getColumns());
+
+            cell = board.getCell(row, col);
+            retries += 1;
+        } while (
+                !cell.getCellState().equals(CellState.EMPTY) &&
+                retries < constants.FOOD_GENERATION_RETRY.getValue()
+        );
+
+        if (cell.getCellState().equals(CellState.EMPTY)) {
+            cell.setCellState(cellState);
+            cell.setValue(foodValue.getValue());
+        } else {
+            throw new BoardNotEmpty("No empty cells on board!");
+        }
+    }
+
+    public static void generateFood(Board board) throws BoardNotEmpty {
+        generateFood(board, CellState.REGULAR_FOOD, FoodValue.REGULAR_FOOD_VALUE);
+        if (shouldGenerateSpecialFood()) {
+            generateFood(board, CellState.SPECIAL_FOOD, FoodValue.SPECIAL_FOOD_VALUE);
+        }
+    }
+}
+
+```
+
+I went with this approach, although it creates coupling between board and FoodGenerator. Maybe I'll refactor it and remove this someday.

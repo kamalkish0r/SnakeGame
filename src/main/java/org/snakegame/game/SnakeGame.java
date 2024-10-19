@@ -4,8 +4,10 @@ import org.snakegame.board.Board;
 import org.snakegame.constants.CellState;
 import org.snakegame.constants.Direction;
 import org.snakegame.cell.Cell;
+import org.snakegame.food.FoodGenerator;
 import org.snakegame.snake.Snake;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -22,6 +24,7 @@ public class SnakeGame {
         int initialSnakeRow = random.nextInt(boardSize);
         int initialSnakeCol = random.nextInt(boardSize);
         snake = new Snake(board.getCell(initialSnakeRow, initialSnakeCol));
+        FoodGenerator.generateFood(board);
     }
 
     private Cell getNextCell(Cell currCell, Direction direction) {
@@ -37,20 +40,47 @@ public class SnakeGame {
         return board.getCell(newRow, newCol);
     }
 
-    public void startGame() {
+    public void startGame() throws IOException {
         while (true) {
+            clearConsole();
             printGameState();
 
             Direction direction = getUserDirection();
-            Cell nextCell = getNextCell(snake.getHead(), direction);
-            if (nextCell == null || nextCell.getCellState().equals(CellState.SNAKE)) {
+
+            Cell nextCell = getCell(direction);
+            if (nextCell == null) {
                 System.out.println("Your score : " + score);
                 System.out.println("...Game Over...");
                 break;
             }
 
+            update(nextCell);
+        }
+    }
+
+    private void update(Cell nextCell) {
+        // if snake ate food increase score and it's length
+        if (nextCell.getCellState() == CellState.REGULAR_FOOD) {
+            System.out.println("Adding " + nextCell.getValue() + " to score");
+            score += nextCell.getValue();
+            snake.move(nextCell);
+            FoodGenerator.generateFood(board);
+        } else {
             snake.move(nextCell);
         }
+    }
+
+    private Cell getCell(Direction direction) {
+        Cell nextCell = getNextCell(snake.getHead(), direction);
+        if (nextCell == null || nextCell.getCellState().equals(CellState.SNAKE)) {
+            return null;
+        }
+        return nextCell;
+    }
+
+    private void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     private void printGameState() {

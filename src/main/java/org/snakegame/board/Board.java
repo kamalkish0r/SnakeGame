@@ -24,6 +24,14 @@ public class Board {
         initialiseBoard();
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
     private void initialiseBoard() {
         for (int row = 0; row < rows; row++) {
             ArrayList<Cell> rowCells = new ArrayList<>();
@@ -51,17 +59,20 @@ public class Board {
 
     @Override
     public String toString() {
+        // Move cursor to top-left corner
+        System.out.print("\033[H");
+
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 CellState currCellState = getCell(row, col).getCellState();
-                if (currCellState == CellState.SNAKE) {
-                    sb.append("*");
-                } else if(currCellState == CellState.FOOD) {
-                    sb.append("#");
-                } else {
-                    sb.append(".");
+                switch (currCellState) {
+                    case SNAKE -> sb.append("*");
+                    case REGULAR_FOOD -> sb.append("#");
+                    case SPECIAL_FOOD -> sb.append("$");
+                    default -> sb.append(".");
                 }
+                sb.append(" ");
             }
             sb.append("\n");
         }

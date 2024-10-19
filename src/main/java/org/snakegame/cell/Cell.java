@@ -5,11 +5,13 @@ import org.snakegame.constants.CellState;
 public class Cell {
     private final int row;
     private final int col;
+    private int value;
     private CellState cellState;
 
     public Cell(int row, int col) {
         this.row = row;
         this.col = col;
+        this.value = 0;
         this.cellState = CellState.EMPTY;
     }
 
@@ -44,4 +46,11 @@ public class Cell {
         return col;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }
