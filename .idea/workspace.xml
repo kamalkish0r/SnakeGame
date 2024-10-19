@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b11d68c-e03d-44e8-b54a-6cd6a3e3a3f8" name="Changes" comment="logging setup">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/snakegame/SnakeGameApplication.java" afterDir="false" />
+    <list default="true" id="8b11d68c-e03d-44e8-b54a-6cd6a3e3a3f8" name="Changes" comment="introduce cellState which tells if a cell is empty, occupied by snake or food">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/snakegame/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/snakegame/SnakeGameApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/snakegame/SnakeGameApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/snakegame/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/snakegame/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/snakegame/cell/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/snakegame/cell/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/snakegame/constants/CellState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/snakegame/constants/CellState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/snakegame/game/SnakeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/snakegame/game/SnakeGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/snakegame/snake/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/snakegame/snake/Snake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thought-process.md" beforeDir="false" afterPath="$PROJECT_DIR$/thought-process.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,32 +23,33 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Exception" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "kamalkish0r"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kamalkish0r&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kamalkish0r/SnakeGame.git",
-    "accountId": "9e0304d5-3d52-4b72-ac9a-ef6d0fcf39f2"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kamalkish0r/SnakeGame.git&quot;,
+    &quot;accountId&quot;: &quot;9e0304d5-3d52-4b72-ac9a-ef6d0fcf39f2&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2ljUMm9BgEKYvIzwlN6c4sP2ULp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -53,10 +60,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.FoodGenerator.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.SnakeGameApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "food",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "D:/code/practice/lld/SnakeGame/src/main/java/org/snakegame/Main.java",
     "settings.editor.selected.configurable": "preferences.keymap"
@@ -67,7 +75,20 @@
       <recent name="D:\code\practice\lld\SnakeGame\thought process and requirements" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.SnakeGameApplication">
+    <configuration name="FoodGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.snakegame.food.FoodGenerator" />
+      <module name="SnakeGame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.snakegame.food.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SnakeGameApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.snakegame.SnakeGameApplication" />
       <module name="SnakeGame" />
@@ -84,6 +105,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.SnakeGameApplication" />
+        <item itemvalue="Application.FoodGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -120,7 +142,31 @@
       <option name="project" value="LOCAL" />
       <updated>1725697358119</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="basic version without food &#10;Currently handled : &#10;* Snake movement&#10;* Game over checks if snake hits wall or self.&#10;* Basic UI to work with.">
+      <option name="closed" value="true" />
+      <created>1725781453776</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725781453776</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix type in getNextCell &amp; update getCell of Board">
+      <option name="closed" value="true" />
+      <created>1725782866846</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725782866846</updated>
+    </task>
+    <task id="LOCAL-00006" summary="introduce cellState which tells if a cell is empty, occupied by snake or food">
+      <option name="closed" value="true" />
+      <created>1728581345052</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1728581345052</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,6 +184,9 @@
     <MESSAGE value="project init" />
     <MESSAGE value="Add README &amp; define problem scope" />
     <MESSAGE value="logging setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="logging setup" />
+    <MESSAGE value="basic version without food &#10;Currently handled : &#10;* Snake movement&#10;* Game over checks if snake hits wall or self.&#10;* Basic UI to work with." />
+    <MESSAGE value="fix type in getNextCell &amp; update getCell of Board" />
+    <MESSAGE value="introduce cellState which tells if a cell is empty, occupied by snake or food" />
+    <option name="LAST_COMMIT_MESSAGE" value="introduce cellState which tells if a cell is empty, occupied by snake or food" />
   </component>
 </project>

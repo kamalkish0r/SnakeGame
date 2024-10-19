@@ -1,10 +1,13 @@
 package org.snakegame.game;
 
 import org.snakegame.board.Board;
+import org.snakegame.constants.CellState;
 import org.snakegame.constants.Direction;
-import org.snakegame.snake.Cell;
+import org.snakegame.cell.Cell;
+import org.snakegame.food.FoodGenerator;
 import org.snakegame.snake.Snake;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,6 +24,7 @@ public class SnakeGame {
         int initialSnakeRow = random.nextInt(boardSize);
         int initialSnakeCol = random.nextInt(boardSize);
         snake = new Snake(board.getCell(initialSnakeRow, initialSnakeCol));
+        FoodGenerator.generateFood(board);
     }
 
     private Cell getNextCell(Cell currCell, Direction direction) {
@@ -36,20 +40,47 @@ public class SnakeGame {
         return board.getCell(newRow, newCol);
     }
 
-    public void startGame() {
+    public void startGame() throws IOException {
         while (true) {
+            clearConsole();
             printGameState();
 
             Direction direction = getUserDirection();
-            Cell nextCell = getNextCell(snake.getHead(), direction);
-            if (nextCell == null || nextCell.isOccupied()) {
+
+            Cell nextCell = getCell(direction);
+            if (nextCell == null) {
                 System.out.println("Your score : " + score);
                 System.out.println("...Game Over...");
                 break;
             }
 
+            update(nextCell);
+        }
+    }
+
+    private void update(Cell nextCell) {
+        // if snake ate food increase score and it's length
+        if (nextCell.getCellState() == CellState.REGULAR_FOOD) {
+            System.out.println("Adding " + nextCell.getValue() + " to score");
+            score += nextCell.getValue();
+            snake.move(nextCell);
+            FoodGenerator.generateFood(board);
+        } else {
             snake.move(nextCell);
         }
+    }
+
+    private Cell getCell(Direction direction) {
+        Cell nextCell = getNextCell(snake.getHead(), direction);
+        if (nextCell == null || nextCell.getCellState().equals(CellState.SNAKE)) {
+            return null;
+        }
+        return nextCell;
+    }
+
+    private void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     private void printGameState() {
@@ -58,19 +89,20 @@ public class SnakeGame {
 
     private Direction getUserDirection() {
         while (true) {
-            System.out.print("Which direction you want to move (L, R, U, D): ");
+            System.out.print("Which direction do you want to move (A, D, W, S): ");
             String input = scanner.nextLine().trim().toUpperCase();
+
             switch (input) {
-                case "L":
+                case "A":
                     return Direction.LEFT;
-                case "R":
-                    return Direction.RIGHT;
-                case "U":
-                    return Direction.UP;
                 case "D":
+                    return Direction.RIGHT;
+                case "W":
+                    return Direction.UP;
+                case "S":
                     return Direction.DOWN;
                 default:
-                    System.out.println("Invalid input. Please enter L, R, U, or D.");
+                    System.out.println("Invalid input. Please enter A, D, W, or S.");
             }
         }
     }

@@ -1,6 +1,7 @@
 package org.snakegame.board;
 
-import org.snakegame.snake.Cell;
+import org.snakegame.cell.Cell;
+import org.snakegame.constants.CellState;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,14 @@ public class Board {
         this.columns = size;
         cells = new ArrayList<>();
         initialiseBoard();
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
     }
 
     private void initialiseBoard() {
@@ -50,14 +59,20 @@ public class Board {
 
     @Override
     public String toString() {
+        // Move cursor to top-left corner
+        System.out.print("\033[H");
+
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                if (getCell(row, col).isOccupied()) {
-                    sb.append("*");
-                } else {
-                    sb.append(".");
+                CellState currCellState = getCell(row, col).getCellState();
+                switch (currCellState) {
+                    case SNAKE -> sb.append("*");
+                    case REGULAR_FOOD -> sb.append("#");
+                    case SPECIAL_FOOD -> sb.append("$");
+                    default -> sb.append(".");
                 }
+                sb.append(" ");
             }
             sb.append("\n");
         }

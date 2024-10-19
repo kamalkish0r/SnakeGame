@@ -1,5 +1,8 @@
 package org.snakegame.snake;
 
+import org.snakegame.cell.Cell;
+import org.snakegame.constants.CellState;
+
 import java.util.LinkedList;
 
 public class Snake {
@@ -14,14 +17,17 @@ public class Snake {
     public Snake(Cell initCell) {
         this.body = new LinkedList<>();
         this.body.addFirst(initCell);
-        initCell.setOccupied();
+        initCell.setCellState(CellState.SNAKE);
     }
 
     public void move(Cell nextCell) {
-        nextCell.setOccupied();
+        boolean removeLast = nextCell.getCellState() == CellState.EMPTY;
+        nextCell.setCellState(CellState.SNAKE);
         body.addFirst(nextCell);
-        body.getLast().setUnoccupied();
-        body.removeLast();
+        if (removeLast) {
+            body.getLast().setUnoccupied();
+            body.removeLast();
+        }
     }
 
     public Cell getHead() {
