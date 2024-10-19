@@ -21,10 +21,13 @@ public class Snake {
     }
 
     public void move(Cell nextCell) {
+        boolean removeLast = nextCell.getCellState() == CellState.EMPTY;
         nextCell.setCellState(CellState.SNAKE);
         body.addFirst(nextCell);
-        body.getLast().setUnoccupied();
-        body.removeLast();
+        if (removeLast) {
+            body.getLast().setUnoccupied();
+            body.removeLast();
+        }
     }
 
     public Cell getHead() {
