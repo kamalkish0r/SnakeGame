@@ -59,19 +59,20 @@ public class SnakeGame {
 
     private Direction getUserDirection() {
         while (true) {
-            System.out.print("Which direction you want to move (L, R, U, D): ");
+            System.out.print("Which direction do you want to move (A, D, W, S): ");
             String input = scanner.nextLine().trim().toUpperCase();
+
             switch (input) {
-                case "L":
+                case "A":
                     return Direction.LEFT;
-                case "R":
-                    return Direction.RIGHT;
-                case "U":
-                    return Direction.UP;
                 case "D":
+                    return Direction.RIGHT;
+                case "W":
+                    return Direction.UP;
+                case "S":
                     return Direction.DOWN;
                 default:
-                    System.out.println("Invalid input. Please enter L, R, U, or D.");
+                    System.out.println("Invalid input. Please enter A, D, W, or S.");
             }
         }
     }
