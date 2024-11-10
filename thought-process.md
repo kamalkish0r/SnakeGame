@@ -173,3 +173,6 @@ public abstract class FoodGenerator {
 ```
 
 I went with this approach, although it creates coupling between board and FoodGenerator. Maybe I'll refactor it and remove this someday.
+
+With this we have reached the end of v1.0. Recently I discovered about JFrame, a library in Java used in java game dev. 
+So I've decided to use it and create game with good graphics.
