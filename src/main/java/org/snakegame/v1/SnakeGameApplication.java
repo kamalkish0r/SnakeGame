@@ -1,8 +1,8 @@
-package org.snakegame;
+package org.snakegame.v1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.snakegame.game.SnakeGame;
+import org.snakegame.v1.game.SnakeGame;
 
 import java.io.IOException;
 

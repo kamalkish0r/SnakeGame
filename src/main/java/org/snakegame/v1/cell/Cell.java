@@ -1,6 +1,6 @@
-package org.snakegame.cell;
+package org.snakegame.v1.cell;
 
-import org.snakegame.constants.CellState;
+import org.snakegame.v1.constants.CellState;
 
 public class Cell {
     private final int row;

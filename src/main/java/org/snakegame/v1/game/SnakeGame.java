@@ -1,11 +1,11 @@
-package org.snakegame.game;
+package org.snakegame.v1.game;
 
-import org.snakegame.board.Board;
-import org.snakegame.constants.CellState;
-import org.snakegame.constants.Direction;
-import org.snakegame.cell.Cell;
-import org.snakegame.food.FoodGenerator;
-import org.snakegame.snake.Snake;
+import org.snakegame.v1.board.Board;
+import org.snakegame.v1.constants.CellState;
+import org.snakegame.v1.constants.Direction;
+import org.snakegame.v1.cell.Cell;
+import org.snakegame.v1.food.FoodGenerator;
+import org.snakegame.v1.snake.Snake;
 
 import java.io.IOException;
 import java.util.Random;
