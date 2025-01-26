@@ -1,7 +1,7 @@
-package org.snakegame.snake;
+package org.snakegame.v1.snake;
 
-import org.snakegame.cell.Cell;
-import org.snakegame.constants.CellState;
+import org.snakegame.v1.cell.Cell;
+import org.snakegame.v1.constants.CellState;
 
 import java.util.LinkedList;
 

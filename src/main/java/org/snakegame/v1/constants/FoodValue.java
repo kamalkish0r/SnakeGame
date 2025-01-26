@@ -1,4 +1,4 @@
-package org.snakegame.constants;
+package org.snakegame.v1.constants;
 
 public enum FoodValue {
     REGULAR_FOOD_VALUE(1),

@@ -1,4 +1,4 @@
-package org.snakegame.constants;
+package org.snakegame.v1.constants;
 
 public enum constants {
     SPECIAL_FOOD_FREQUENCY(10),

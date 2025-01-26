@@ -1,11 +1,11 @@
-package org.snakegame.food;
+package org.snakegame.v1.food;
 
-import org.snakegame.board.Board;
-import org.snakegame.cell.Cell;
-import org.snakegame.constants.CellState;
-import org.snakegame.constants.FoodValue;
-import org.snakegame.constants.constants;
-import org.snakegame.expception.BoardNotEmpty;
+import org.snakegame.v1.board.Board;
+import org.snakegame.v1.cell.Cell;
+import org.snakegame.v1.constants.CellState;
+import org.snakegame.v1.constants.FoodValue;
+import org.snakegame.v1.constants.constants;
+import org.snakegame.v1.expception.BoardNotEmpty;
 
 import java.util.Random;
 

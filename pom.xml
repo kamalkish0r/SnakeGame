@@ -59,7 +59,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.snakegame.SnakeGameApplication</mainClass>
+                                    <mainClass>org.snakegame.v1.SnakeGameApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

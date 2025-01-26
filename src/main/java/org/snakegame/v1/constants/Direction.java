@@ -1,4 +1,4 @@
-package org.snakegame.constants;
+package org.snakegame.v1.constants;
 
 public enum Direction {
     LEFT, RIGHT, UP, DOWN;
